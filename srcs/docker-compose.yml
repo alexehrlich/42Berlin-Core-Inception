@@ -1,14 +1,14 @@
 #define version of docker-compose syntax
-version: "3.5" 
+version:	"3.8" 
 
 #define volumes to store the application data persistently
 # even when the container is stopped.
 volumes:
-  wordpress:
-		name: wordpress
-		driver: local #volumes will be managed locally by docker on the host machine
+	wordpress:
+		name:	wordpress
+		driver:	local #volumes will be managed locally by docker on the host machine
 		driver_opts:
-			device: PATH #specifies where on the host machine the data will be stores
+			device: /Users/alexanderehrlich/Coding/42/Core/Inception/srcs/wordpress #specifies where on the host machine the data will be stores
 			o: bind #volume is mounted using a bind mount, directory from the host machine is mounted into the container
 							#Mounting: Connecting a folder on the host machine to Docker. Container then can access files from the host
 			type: none #simple directory bind mount
@@ -16,7 +16,7 @@ volumes:
 		name: mariadb
 		driver: local
 		driver_opts:
-			device: #PATH TO MARIA DB
+			device: /Users/alexanderehrlich/Coding/42/Core/Inception/srcs/mariadb
 			o: bind
 			type: none
 
