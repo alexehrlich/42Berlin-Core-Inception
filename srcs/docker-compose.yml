@@ -1,5 +1,5 @@
 #define version of docker-compose syntax
-version:	"3.8" 
+version: "3.8" 
 
 #define volumes to store the application data persistently
 # even when the container is stopped.
