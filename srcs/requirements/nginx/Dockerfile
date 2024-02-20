@@ -1,9 +1,19 @@
-FROM debian:buster
+FROM debian:bullseye
 
-RUN apt -y update && apt install -y nginx && apt install openssl -y
+RUN apt-get update && apt-get install -y nginx
+RUN apt-get install openssl
 
-# COPY ./conf/default /etc/nginx/sites-available/
+RUN mkdir /etc/nginx/ssl
 
-COPY ./tools/script.sh /
+RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
+	-out /etc/nginx/ssl/aehrlich.crt \
+	-keyout /etc/nginx/ssl/aehrlich.key \
+	-subj "/C=FR/ST=Paris/L=Paris/0=42 School/OU=aehrlich/CN=aehrlich"
 
-CMD [ "/script.sh" ]
+COPY ./nginx.conf /etc/nginx/conf.d
+
+RUN mkdir -p /run/nginx
+
+EXPOSE 443
+
+CMD ["nginx", "-g", "daemon off;"]
