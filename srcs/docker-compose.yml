@@ -8,7 +8,7 @@ volumes:
 		name:	wordpress
 		driver:	local #volumes will be managed locally by docker on the host machine
 		driver_opts:
-			device: /Users/alexanderehrlich/Coding/42/Core/Inception/srcs/wordpress #specifies where on the host machine the data will be stores
+			device: ~/data/wordpress #specifies where on the host machine the data will be stores
 			o: bind #volume is mounted using a bind mount, directory from the host machine is mounted into the container
 							#Mounting: Connecting a folder on the host machine to Docker. Container then can access files from the host
 			type: none #simple directory bind mount
@@ -16,7 +16,7 @@ volumes:
 		name: mariadb
 		driver: local
 		driver_opts:
-			device: /Users/alexanderehrlich/Coding/42/Core/Inception/srcs/mariadb
+			device: ~/data/mariadb
 			o: bind
 			type: none
 
