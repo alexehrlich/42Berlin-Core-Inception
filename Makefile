@@ -6,7 +6,7 @@
 #    By: aehrlich <aehrlich@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/18 11:03:35 by aehrlich          #+#    #+#              #
-#    Updated: 2024/02/20 16:50:33 by aehrlich         ###   ########.fr        #
+#    Updated: 2024/02/20 16:51:17 by aehrlich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ all: up
 up:
 	@if ! [ -d "/home/aehrlich/data" ]; then \
 		mkdir /home/aehrlich/data; \
-		mkdir /home//aehrlichdata/wordpress; \
-		mkdir/home//aehrlichdata/mysql; \
+		mkdir /home/aehrlich/data/wordpress; \
+		mkdir/home/aehrlich/data/mysql; \
 		echo "Data volumes created"; \
 	fi
 	@docker-compose -f ./srcs/docker-compose.yml up -d
