@@ -6,7 +6,7 @@
 #    By: aehrlich <aehrlich@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/18 11:03:35 by aehrlich          #+#    #+#              #
-#    Updated: 2024/02/20 16:17:54 by aehrlich         ###   ########.fr        #
+#    Updated: 2024/02/20 16:26:12 by aehrlich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,10 @@ all: up
 # -f: specify the path
 # -d: start in detatched mode - runs in the background
 up:
-	@if ! [ -d "~/data" ]; then \
-		mkdir ~/data; \
-		mkdir ~/data/wordpress; \
-		mkdir ~/data/mysql; \
+	@if ! [ -d "/home/data" ]; then \
+		mkdir /home/data; \
+		mkdir /home/data/wordpress; \
+		mkdir/home/data/mysql; \
 		echo "Data volumes created"; \
 	fi
 	@docker-compose -f ./srcs/docker-compose.yml up -d
