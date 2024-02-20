@@ -6,8 +6,6 @@ RUN apt-get install openssl
 
 RUN mkdir /etc/nginx/ssl
 
-RUN touch ./HELLOOOOO
-
 RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 	-out /etc/nginx/ssl/aehrlich.crt \
 	-keyout /etc/nginx/ssl/aehrlich.key \
