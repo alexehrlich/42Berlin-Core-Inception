@@ -6,7 +6,7 @@
 #    By: aehrlich <aehrlich@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/18 11:03:35 by aehrlich          #+#    #+#              #
-#    Updated: 2024/02/20 16:54:33 by aehrlich         ###   ########.fr        #
+#    Updated: 2024/02/20 19:16:53 by aehrlich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ up:
 		mkdir /home/aehrlich/data/mariadb; \
 		echo "Data volumes created"; \
 	fi
-	@docker-compose -f ./srcs/docker-compose.yml up -d
+	@docker-compose -f ./srcs/docker-compose.yml up -d --build
 
 #stop and remove the containers, networks and volumes from the 
 # specified docker-compose.yml
