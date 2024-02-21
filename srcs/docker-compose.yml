@@ -5,18 +5,26 @@ version: "3.8"
 # in the multi-container application
 services:
     nginx:
+        #define the image to pull from DockerHub
         image: nginx
+        #set a custom name for the container
         container_name: nginx
+        #specify the .env file to use in the container
         env_file: .env
+        #Mount the wordpress_volume from the host to /var/www/wordpress in the container
         volumes:
             - wordpress_volume:/var/www/wordpress
+        #connect to the container network 'inception' of the multi-container application
         networks:
             - inception
+        #build wordpress first
         depends_on:
             - wordpress
+        #specify where the Dockerfile for this service lies.
         build:
             context: requirements/nginx
             dockerfile: Dockerfile
+        #Map the host port 443 to the container port 443 --> HTTPS
         ports:
             - 443:443
         restart: always
@@ -49,12 +57,16 @@ services:
             dockerfile: Dockerfile
         restart: always
 
+#define the volumes for persistent data in the appllication
 volumes:
     wordpress_volume:
+        #volume will be managed locally on the host
         driver: local
         driver_opts:
             type: 'none'
+            #directly map the host to the container
             o: 'bind'
+            #specify the path on the host that will be mounted to the volume
             device: '/home/data/wordpress'
     mariadb_volume:
         driver: local
@@ -63,6 +75,7 @@ volumes:
             o: 'bind'
             device: '/home/data/mariadb'
 
+#define a custom network for communication between the containers
 networks:
     inception:
         driver: bridge
