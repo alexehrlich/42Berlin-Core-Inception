@@ -1,5 +1,8 @@
+#defining the version of docker-compose syntax to use
 version: "3.8"
 
+#define the services nginx, wordpress and mariadb, which are the images to be build
+# in the multi-container application
 services:
     nginx:
         image: nginx
