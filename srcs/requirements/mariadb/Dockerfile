@@ -1,13 +1,19 @@
-#define the base image to use
-FROM debian:oldstable
+FROM debian:buster
 
-#update the package-manager and install the mariadb-server-package
-RUN apt-get update -y
+EXPOSE 3306
+
+# Update and upgrade:
+RUN apt update -y && apt upgrade -y
+
+# Install MariaDB:
 RUN apt-get install mariadb-server -y
 
-#copy the conifg file from the container to local
-COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
+# Copy config file for mariadb:
+COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
-COPY ./tools/script.sh /
+# Copy setup script aand change permissions:
+COPY ./tools/mariadb_setup.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/mariadb_setup.sh
 
-CMD ["/script.sh"]
+# Run setup script at entrypoint:
+ENTRYPOINT [ "bash", "/usr/local/bin/mariadb_setup.sh" ]

@@ -1,20 +1,23 @@
-FROM debian:bullseye
-
-RUN apt-get update
-RUN apt-get install -y nginx
-RUN apt-get install openssl
-
-RUN mkdir /etc/nginx/ssl
-
-RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
-	-out /etc/nginx/ssl/aehrlich.crt \
-	-keyout /etc/nginx/ssl/aehrlich.key \
-	-subj "/C=FR/ST=Paris/L=Paris/0=42 School/OU=aehrlich/CN=aehrlich"
-
-COPY ./nginx.conf /etc/nginx/conf.d
-
-RUN mkdir -p /run/nginx
+FROM debian:buster
 
 EXPOSE 443
 
-CMD ["nginx", "-g", "daemon off;"]
+# Update and upgrade:
+RUN apt update -y && apt upgrade -y
+
+# Install nginx and OpenSSL:
+RUN apt install nginx -y && apt install openssl -y
+
+# Create and save TSL certificate:
+RUN mkdir -p /etc/nginx/ssl && openssl req -x509 -nodes \
+		-out /etc/nginx/ssl/TSL_certificate.crt -keyout /etc/nginx/ssl/TSL_private.key \
+		-subj "/C=DE/ST=Berlin/L=Berlin/O=42/OU=42/CN=ycardona.42.fr/UID=ycardona"
+
+# Create directory to store nginx logs:
+RUN mkdir -p /run/nginx
+
+# Copy config file to the correct location:
+COPY ./conf/nginx.conf /etc/nginx/conf.d/server.conf
+
+# run nginx in the foreground:
+CMD [ "nginx", "-g", "daemon off;" ]

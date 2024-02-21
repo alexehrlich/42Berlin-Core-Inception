@@ -1,45 +1,29 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: aehrlich <aehrlich@student.42berlin.de>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/18 11:03:35 by aehrlich          #+#    #+#              #
-#    Updated: 2024/02/20 19:16:53 by aehrlich         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+
+DOCKER_COMPOSE = ./srcs/docker-compose.yml
+DATA_PATH = /home/data
 
 all: up
 
-#start the multicontainer application
-# -f: specify the path
-# -d: start in detatched mode - runs in the background
 up:
-	@if ! [ -d "/home/aehrlich/data" ]; then \
-		mkdir /home/aehrlich/data; \
-		mkdir /home/aehrlich/data/wordpress; \
-		mkdir /home/aehrlich/data/mariadb; \
-		echo "Data volumes created"; \
-	fi
-	@docker-compose -f ./srcs/docker-compose.yml up -d --build
+	@sudo mkdir -p $(DATA_PATH)/wordpress
+	@sudo mkdir -p $(DATA_PATH)/mariadb
+	@sudo docker-compose -f $(DOCKER_COMPOSE) up -d
 
-#stop and remove the containers, networks and volumes from the 
-# specified docker-compose.yml
+stop:
+	@sudo docker-compose -f $(DOCKER_COMPOSE) stop
+
+# down stops and removes the containers 
+# -v removes any volumes associated with the containers being stopped and removed
 down:
-	@docker-compose -f ./srcs/docker-compose.yml down
+	@sudo docker-compose -f $(DOCKER_COMPOSE) down -v
 
-#stop the containers, networks and volumes from the 
-# specified docker-compose.yml without removing
-stop : 
-	@docker-compose -f ./srcs/docker-compose.yml stop
+# cleans up unused containers, networks, volumes, and images
+clean: down
+	@sudo docker system prune -af
 
-#start the containers, networks and volumes from the 
-# specified docker-compose.yml which were stopped
-start : 
-	@docker-compose -f ./srcs/docker-compose.yml start
+remove_data:
+	@sudo rm -rf $(DATA_PATH)
 
-# list all the running docker containers
-status : 
-	@docker ps
+re: clean up
 
+.PHONY: all up stop remove_data down clean re
