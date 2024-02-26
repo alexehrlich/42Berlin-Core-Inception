@@ -1,4 +1,5 @@
-FROM debian:buster
+#FROM debian:buster
+FROM debian:oldstable
 
 #listen to port 9000 during runtime (Fast CGI)
 EXPOSE 9000
