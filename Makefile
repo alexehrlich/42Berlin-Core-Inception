@@ -1,6 +1,6 @@
 
 DOCKER_COMPOSE = ./srcs/docker-compose.yml
-DATA_PATH = /home/data
+DATA_PATH = /home/aehrlich/data
 
 all: up
 
