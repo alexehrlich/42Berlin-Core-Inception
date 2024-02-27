@@ -1,6 +1,6 @@
 #Get base image from docker hub
-#FROM debian:buster
-FROM debian:oldstable
+FROM debian:buster
+#FROM debian:oldstable
 
 #listen to port 3306 at runtime. Port 3306 ist default port for maria db to listen to DB server
 EXPOSE 3306
