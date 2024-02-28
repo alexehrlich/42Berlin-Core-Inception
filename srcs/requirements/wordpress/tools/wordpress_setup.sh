@@ -37,4 +37,4 @@ if [ ! -d /run/php ]; then
 fi
 
 # start the fast cgi process manager and run it in the foreground
-/usr/sbin/php-fpm7.3 -F
+/usr/sbin/php-fpm7.4 -F
