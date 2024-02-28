@@ -8,7 +8,7 @@ EXPOSE 3306
 RUN apt update -y && apt upgrade -y
 
 # Install MariaDB:
-RUN apt-get install mariadb-server -y
+RUN apt-get install mariadb-server mariadb-client -y
 
 # Copy config file from the host machine for mariadb to the /etc of the container
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
