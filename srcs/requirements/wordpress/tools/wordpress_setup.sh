@@ -3,6 +3,8 @@
 #change working dir to where all the wordpress files are
 cd /var/www/wordpress
 
+touch Hello.txt
+
 # give MariaDB time to lauch correctly:
 sleep 10
 
