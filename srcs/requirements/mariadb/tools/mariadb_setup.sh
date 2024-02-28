@@ -7,10 +7,10 @@ service mariadb start
 # -e: Execute a single line in the command line
 
 #create a new database with the name from the .env
-mariadb -e "CREATE DATABASE \`${SQL_DATABASE}\`;"
+mariadb -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
 
 #create a new user
-mariadb -e "CREATE USER \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_PSWD}';"
+mariadb -e "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_PSWD}';"
 
 #give all privileages to the user
 mariadb -e "GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO \`${SQL_USER}\`@'%' IDENTIFIED BY '${SQL_PSWD}';"
