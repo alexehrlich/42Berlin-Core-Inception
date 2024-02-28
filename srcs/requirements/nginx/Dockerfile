@@ -17,7 +17,7 @@ RUN apt install nginx -y && apt install openssl -y
 		# -nodes: encrypt the private key
 		# -out: safe the cert in a file
 		# -keyout: safe the key in a file
-RUN mkdir -p /etc/nginx/ssl && openssl req -x509 -nodes \
+RUN mkdir -p /etc/nginx/ssl && openssl req -x509 -nodes -newkey rsa:4096 -days 365\
 		-out /etc/nginx/ssl/TSL_certificate.crt -keyout /etc/nginx/ssl/TSL_private.key \
 		-subj "/C=DE/ST=Berlin/L=Berlin/O=42/OU=42/CN=aehrlich.42.fr/UID=aehrlich"
 
