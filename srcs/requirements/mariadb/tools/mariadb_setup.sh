@@ -7,10 +7,10 @@ service mysql start
 # -e: Execute a single line in the command line
 
 #create a new database with the name from the .env
-mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
+mysql -e "CREATE DATABASE \`${SQL_DATABASE}\`;"
 
 #create a new user
-mysql -e "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_PSWD}';"
+mysql -e "CREATE USER \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_PSWD}';"
 
 #give all privileages to the user
 mysql -e "GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO \`${SQL_USER}\`@'%' IDENTIFIED BY '${SQL_PSWD}';"
