@@ -1,5 +1,4 @@
-FROM debian:buster
-#FROM debian:oldstable
+FROM debian:bullseye
 
 #listen to port 9000 during runtime (Fast CGI)
 EXPOSE 9000
@@ -11,10 +10,10 @@ RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get -y install wget
 
 # install php, php fast cgi process manager, mysql extenion for php and the mariadb client
-RUN apt-get -y install php7.3 php-fpm php-mysql mariadb-client
+RUN apt-get -y install php7.4 php7.4-fpm php-mysql mariadb-client
 
 #copy the wordpressconf from the host machine to the docker container
-COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 #set the working directorie (like cd) inside the container
 # download the wordpress and save it in the container

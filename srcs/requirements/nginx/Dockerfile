@@ -1,5 +1,4 @@
-FROM debian:buster
-#FROM debian:oldstable
+FROM debian:bullseye
 
 #container will listen to this port at runtime. Its mapped to the hosts 443 (docker compose)
 EXPOSE 443
